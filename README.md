@@ -1,1 +1,2 @@
-Analizador léxico hecho con react y nodeJs
+Run the project
+npm start
