@@ -1,2 +1,2 @@
 Run the project
-npm start 
+npm start
