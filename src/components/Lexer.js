@@ -8,7 +8,7 @@ function Lexer() {
   const [tokens, setTokens] = useState([]);
 
   const analyzeSourceCode = () => {
-    const keywords = ['if', 'else', 'for', 'print', 'int'];
+    const keywords = ['if', 'else', 'for', 'print', 'int', 'string', 'while', 'float', 'const', 'let'];
     const operators = ['+', '-', '*', '/', ':=', '>=', '<=', '>', '<', '=', '<>', '{', '}', '[', ']', '(', ')', ',', ';', '..'];
     const sourceLines = sourceCode.split('\n');
   
@@ -21,22 +21,31 @@ function Lexer() {
   
         if (word.toLowerCase() === 'if') {
           extractedTokens.push('Palabra reservada if');
+
         } else if (word.toLowerCase() === 'true') {
           extractedTokens.push('Constante booleana true');
+
         } else if (word.toLowerCase() === 'false') {
           extractedTokens.push('Constante booleana false');
+
         } else if (keywords.includes(word.toLowerCase())) {
           extractedTokens.push(`Palabra reservada ${word}`);
+
         } else if (operators.includes(word)) {
           extractedTokens.push(`Operador ${word}`);
+
         } else if (/^[a-zA-Z][a-zA-Z0-9]{0,14}$/.test(word)) {
           extractedTokens.push(`Identificador ${word}`);
+
         } else if (/^\d+$/.test(word) && parseInt(word) >= 0 && parseInt(word) <= 100) {
           extractedTokens.push(`Constante entera ${word}`);
+
         } else if (/^[bfhjk]+$/.test(word)) {
           extractedTokens.push(`Constante correspondiente a ${word}`);
+
         } else if (word.startsWith('"') && word.endsWith('"')) {
           extractedTokens.push(`Cadena de caracteres ${word}`);
+
         } else {
           extractedTokens.push(`Error: Token no reconocido - ${word}`);
         }
